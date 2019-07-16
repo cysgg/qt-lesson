@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/weui/1.1.3/style/weui.css" rel="stylesheet">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page tabbar js_show">
+            <div class="page__bd" style="height: 100%;">
+                <div class="weui-tab">
+                    <div class="weui-tab__panel tab show">
+                        <h1>1</h1>
+                        <h1>2</h1>
+                        <h1>3</h1>
+                        <h1>4</h1>
+                        <h1>5</h1>
+                        <h1>6</h1>
+                        <h1>7</h1>
+                        <h1>8</h1>
+                        <h1>9</h1>
+                        <h1>10</h1>
+                        <h1>11</h1>
+                        <h1>12</h1>
+                        <h1>13</h1>
+                        <h1>14</h1>
+                        <h1>15</h1>
+                        <h1>16</h1>
+                        <h1>17</h1>
+                        <h1>18</h1>
+                        <h1>19</h1>
+                        <h1>20</h1>
+                    </div>
+                    <div class="weui-tab__panel tab">
+                        <h1>hahhahaha</h1>
+                    </div>
+                    <div class="weui-tab__panel tab">
+                        <h1>hahhahaha</h1>
+                    </div>
+                    <div class="weui-tabbar">
+                        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+                            <span style="display: inline-block;position: relative;">
+                                <img src="./images/shuiguo.png" alt="" class="weui-tabbar__icon">
+                                <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
+                            </span>
+                            <p class="weui-tabbar__label">微信</p>
+                        </a>
+                        <a href="javascript:;" class="weui-tabbar__item">
+                            <img src="./images/shuiguo_4.png" alt="" class="weui-tabbar__icon">
+                            <p class="weui-tabbar__label">通讯录</p>
+                        </a>
+                        <a href="javascript:;" class="weui-tabbar__item">
+                            <span style="display: inline-block;position: relative;">
+                                <img src="./images/shuiguoqu.png" alt="" class="weui-tabbar__icon">
+                                <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
+                            </span>
+                            <p class="weui-tabbar__label">发现</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let weuiTabbarItems = document.querySelectorAll('.weui-tabbar__item');
+        
+        [].forEach.call(weuiTabbarItems,(item,index)=>{
+            item.addEventListener('click',(e)=>{
+                let tabs = document.querySelectorAll('.tab');
+                [].forEach.call(tabs,(item,_index)=>{
+                    if(_index === index)
+                        item.classList.add('show')
+                    else
+                        item.classList.remove('show')
+                })
+            })
+        })
+    </script>
+</body>
+</html>

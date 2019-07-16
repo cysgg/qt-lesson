@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+    <style>
+        body{
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+        #draw{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- 画布 -->
+    <canvas id="draw" width="800" height="800">
+    
+    </canvas>
+    <script>
+        const mycanvas = document.querySelector('#draw');
+        // console.log(mycanvas);
+        //步骤
+        const cxk = mycanvas.getContext('2d')
+        //绘画环境
+        // BOM Browser Object Model
+        //  DOM Document Object Model
+        mycanvas.width = document.documentElement.clientWidth - 2 ;
+        mycanvas.height = document.documentElement.clientHeight - 6;
+
+        cxk.strokeStyle = '#123'//描边颜色
+        cxk.lineWidth = 20;//划线宽度
+        cxk.lineJoin = 'round'//交接点有圆点
+        cxk.lineCap = 'round'//
+        // cxk.moveTo(100,100)
+        // cxk.lineTo(200,200)
+        // cxk.lineTo(168,649)
+        // cxk.stroke();
+        let idDrawing = false, //鼠标是否按下
+            lasttag = [],
+            hue = 0,
+            direction = true;
+
+        while(idDrawing){
+            cxk.lineTo(event.offsetX,event.offsetY);
+            cxk.stroke();
+        }
+        
+        function draw(event){
+            if(!idDrawing) return;
+            else{
+                cxk.strokeStyle = 'hsl('+ hue +',100%,50%)' //描边颜色
+                cxk.beginPath();
+
+                cxk.lineTo(...lasttag);
+                cxk.stroke();
+            }
+            lasttag = [event.offsetX,event.offsetY]
+            hue += 1
+            if(hue >= 360){
+                hue = 0
+            }
+            if(cxk.lineWidth >= 100 || cxk.lineWidth <= 1){
+                direction = !direction
+            }
+
+            if(direction){
+                cxk.lineWidth++
+            }else{
+                cxk.lineWidth--
+            }
+            e.stopPropagation();
+            
+        }
+        mycanvas.addEventListener('mousedown',(event)=>{
+            idDrawing = true
+            lasttag = [event.offsetX,event.offsetY]
+            cxk.moveTo(event.offsetX,event.offsetY)
+        })
+
+        mycanvas.addEventListener('mousemove',draw)
+        mycanvas.addEventListener('touchmove',draw)
+        mycanvas.addEventListener('mouseup', event=>idDrawing = false)
+        mycanvas.addEventListener('mouseout', event=>idDrawing = false)
+    </script>
+</body>
+</html>
