@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #f2f2f2;
+}
+header{
+    background: url(./images/图层\ 1.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+header .mask{
+    width: 100%;
+    height: 100%;
+    background:rgba(20,20,20,.65);
+    overflow: hidden;
+}
+header .content{
+    width:970px;
+    margin: 208px auto 0 auto;
+}
+header .title{
+    font-size:62px;
+    font-family:Montserrat-ExtraLight;
+    font-weight:200;
+    color:rgba(255,255,255,1);
+    line-height:72px;
+    text-align: center;
+}
+header .text{
+    width:766px;
+    font-size:20px;
+    font-family:Montserrat-ExtraLight;
+    font-weight:200;
+    color:rgba(255,255,255,1);
+    line-height:32px;
+    opacity:0.7;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 86px;
+}
+header .account{
+    width: 970px;
+    height: 250px;
+    margin: 0 auto;
+    margin-top: 104px;
+    margin-bottom: 220px;
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+}
+
+.account .head{
+    margin-top: 61px;
+    text-align: center;
+    font-size:16px;
+    font-family:Montserrat-Light;
+    font-weight:300;
+    color:rgba(255,255,255,1);
+    line-height:28px;
+    text-transform: uppercase;
+}
+.account .cont{
+    margin-top: 19px;
+    text-align: center;
+    font-size:12px;
+    font-family:Montserrat-Light;
+    font-weight:300;
+    color:rgba(255,255,255,.3);
+    text-transform: uppercase;
+}
+.account .input{
+    display: flex;
+    justify-content: space-between;
+    width: 770px;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+.input input{
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    width: 292px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    text-indent: 22px;
+}
+
+.input .sp3{
+    width: 125px;
+    text-indent: 0;
+    background-color: #fff;
+    color: #000;
+    text-transform: uppercase;
+    cursor: pointer;
+}

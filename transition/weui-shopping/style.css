@@ -14,3 +14,12 @@
 .tab.show{
     display: block;
 }
+
+.mine-title{
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    font-weight: bold;
+}

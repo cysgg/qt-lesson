@@ -13,33 +13,43 @@
         <div class="page tabbar js_show">
             <div class="page__bd" style="height: 100%;">
                 <div class="weui-tab">
-                    <div class="weui-tab__panel tab show">
+                    <div class="weui-tab__panel tab">
                         <h1>1</h1>
                         <h1>2</h1>
                         <h1>3</h1>
                         <h1>4</h1>
-                        <h1>5</h1>
-                        <h1>6</h1>
-                        <h1>7</h1>
-                        <h1>8</h1>
-                        <h1>9</h1>
-                        <h1>10</h1>
-                        <h1>11</h1>
-                        <h1>12</h1>
-                        <h1>13</h1>
-                        <h1>14</h1>
-                        <h1>15</h1>
-                        <h1>16</h1>
-                        <h1>17</h1>
-                        <h1>18</h1>
-                        <h1>19</h1>
-                        <h1>20</h1>
                     </div>
                     <div class="weui-tab__panel tab">
                         <h1>hahhahaha</h1>
                     </div>
-                    <div class="weui-tab__panel tab">
-                        <h1>hahhahaha</h1>
+                    <div class="weui-tab__panel tab show">
+                        <div class="mine-title">
+                            我的
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd" style="border-radius: 50%;overflow: hidden;position: relative;margin-right: 10px;">
+                                <img src="./images/shuiguojuan.png" style="width: 50px;display: block">
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>联系人名称</p>
+                                <p style="font-size: 13px;color: #888888;">摘要信息</p>
+                            </div>
+                        </div>
+                        <a class="weui-cell weui-cell_access weui-cell_example" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="./images/kafei.png" style="width:20px;margin-right:16px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>文字标题</p>
+                            </div>
+                            <span class="weui-cell__ft">124</span>
+                        </a>
+                        <a class="weui-cell weui-cell_access weui-cell_example" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="./images/baomihua.png" style="width:20px;margin-right:16px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>文字标题</p>
+                            </div>
+                            <span class="weui-cell__ft">55</span>
+                        </a>
+
                     </div>
                     <div class="weui-tabbar">
                         <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
@@ -71,11 +81,16 @@
         [].forEach.call(weuiTabbarItems,(item,index)=>{
             item.addEventListener('click',(e)=>{
                 let tabs = document.querySelectorAll('.tab');
-                [].forEach.call(tabs,(item,_index)=>{
-                    if(_index === index)
-                        item.classList.add('show')
-                    else
-                        item.classList.remove('show')
+                [].forEach.call(tabs,(_item,_index)=>{
+                    if(_index === index){
+                        _item.classList.add('show')
+                        weuiTabbarItems[_index].classList.add('weui-bar__item_on')
+                    }
+                    else{
+                        _item.classList.remove('show')
+                        weuiTabbarItems[_index].classList.remove('weui-bar__item_on')
+                    }
+                        
                 })
             })
         })
