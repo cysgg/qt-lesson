@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <header class="nav">
         <i class="arrow-left"></i>
@@ -30,40 +32,108 @@
                     <!-- detail -->
                     <div class="movie-content">
                         <div class="movie-name">
-                            <span id="movieName">老师好</span>
+                            <span id="movieName"></span>
                         </div>
                         <div class="movie-ename">
-                            <span>hello teacher</span>
+                            <span></span>
                         </div>
                         <!-- star -->
-                        <div class="released-score">
+                        <div class="movie-score">
                             <div class="rating" id="rating">
                                 <span class="rating-score"></span>
                             </div>
                             <div class="score-num">
-                                (<span>41321</span>人评分)
+                                (<span></span>人评分)
                             </div>
                         </div>
+                        <div class="movie-detail">
+                            <div class="movie-type">
+
+                            </div>
+                            <div class="address-time">
+                                <span class="address"></span>/
+                                <spen class="time"></spen>分钟
+                            </div>
+                            <p class="date"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="operating flex">
+                    <div class="movie-watch flex1" id="movie-watch">
+                        <img src="./images/heart.png" alt="">
+                        <span>想看</span>
+                    </div>
+                    <div class="movie-mark flex1">
+                        <img src="./images/star2.png" alt="">
+                        <span>评分</span>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- section2 -->
+        <section class="section-seprate">
+            <div class="text-expander" id="text-expander">
+                <div class="text-expander__content close">
+                    <p>浩瀚太空，航天员意外失联，生命最大的绝境中，他回忆起自己那个最了不起的爸爸。一
+                        对父子跨越漫长的时光，守护爱和亲情，故事充满了欢乐、温暖、泪浩瀚太空，航天员意外失联，生命最大的绝境中，他回忆起自己那个最了不起的爸爸。一
+                        对父子跨越漫长的时光，守护爱和亲情，故事充满了欢乐、温暖、泪</p>
+                </div>
+                <div class="text-expander__button">
+                    <i class="icon-chevron_down"></i>
+                </div>
+            </div>
+        </section>
+        <!-- section3 -->
+        <section class="section-seprate">
+            <p class="action-list section-title">
+                演职人员
+            </p>
+            <ul class="movie-celebrities">
+                <!-- <li>
+                    <a href="javascript:;" class="link">
+                        <div class="movie-celebrities__pic">
+                            <img src="http://p0.meituan.net/movie/665a25835d7332d503eb4c018ece473915209.jpg@250w_140h_1e_1c.webp" alt="">
+                        </div>
+                        <span class="movie-celebrities-nick">于谦</span>
+                        <span class="movie-celebrities-roles">主角</span>
+                    </a>
+                </li> -->
+            </ul>
+        </section>
+        <!-- section4 -->
+        <section class="movie-booking section-seprate section-expender">
+            <p class="section-title">票房</p>
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <div class="placeholder">
+                        <span class="ranking"></span>
+                        <p>昨日票房（万）</p>
+                    </div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder">
+                        <span class="bookingWeek"></span>
+                        <p>首周票房（万）</p>
+                    </div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder">
+                        <span class="bookingTotal"></span>
+                        <p>累计票房（万）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="toast">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                <p class="weui-toast__content">已标记为想看</p>
+            </div>
+        </div>
     </div>
-    <script>
-        $(document).ready(()=>{
-                $.ajax({
-                    url : "https://www.easy-mock.com/mock/5d2ed7ca7f168b5e40d35f47/movie/mymovie-learn",
-                    type : 'GET',
-                    success : function(data){
-                        $('#moviePic').attr('src',data.data.moviePic)
-                        $('.score-num span').html(data.data.people)
-                        $('#movieName').html(data.data.name)
-                        $('.movie-ename span').html(data.data.nameEnglish)
-                        
-                        
-                    }
-                })
-            })
-    </script>
+    <script src="./js/index.js"></script>
 </body>
+
 </html>
