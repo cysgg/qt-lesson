@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>街头霸王</title>
+</head>
+<body>
+    <button id="replay">播放录像</button>
+    <script>
+        let currentPlayer = null;
+        const Ryu = {
+            name : 'Ryu',
+            sex : 'man',
+            attack : function(){
+                console.log(this.name,'attack');
+                
+            },
+            defense : function(){
+                console.log(this.name,'defense');
+                
+            },
+            jump : function(){
+                console.log(this.name,'jump');
+                
+            },
+            crouch : function(){
+                console.log(this.name,'crouch');
+                
+            }
+        }
+        const Chunli = {
+            name : 'Chunli',
+            sex : 'woman',
+            attack : function(){
+                console.log(this.name,'attack');
+                
+            },
+            defense : function(){
+                console.log(this.name,'defense');
+                
+            },
+            jump : function(){
+                console.log(this.name,'jump');
+                
+            },
+            crouch : function(){
+                console.log(this.name,'crouch');
+                
+            }
+        }
+        const commands = {
+            '119' : "jump", //w
+            "115" : "crouch", //s
+            "97"  : "defense", //a
+            "100" : "attack" //d
+        }
+
+        function makeCommand(target,command){
+            // if(command){
+            //     target[command]();
+            // }
+            
+            return ()=>{
+                target[command]?target[command]():null
+            }
+        }
+        currentPlayer = Chunli
+        const commandStack = []
+        document.onkeypress = function(ev){
+            // keyCode 对应的 动作 动起来
+            // 1. 抽象能力 ev.keyCode : 动作
+            let keyCode = ev.keyCode,
+                command = makeCommand(currentPlayer,commands[keyCode])
+           
+            command();
+            commandStack.push(command)
+            
+            // if(commands[ev.keyCode]){
+            //     Ryu[commands[ev.keyCode]]();
+            // }
+            
+        }
+        document.getElementById('replay').onclick = function(){
+            let command;
+            let commands = commandStack.slice(0)
+            while(command = commands.shift()){
+                command();
+            }
+        }
+    </script>
+</body>
+</html>
