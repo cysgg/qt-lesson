@@ -67,3 +67,110 @@ body {
         transform: rotate(0);
     }
 }
+.leg2{
+    display: block;
+    position: absolute;
+    left: 185px;
+    top: 958px;
+    width: 130px;
+    height: 32px;
+    background-color: #000;
+    background: url(./images/f.png) no-repeat;
+    animation: ani_leg2 8s ease infinite;
+    transform-origin: 91% 33%;
+}
+
+.leg2 .jiojio{
+    display: block;
+    position: absolute;
+    background: url(./images/g.png) no-repeat;
+    left: -27.75px;
+    top: -10.5px;
+    width: 57px;
+    height: 44px;
+
+}
+
+.leg1{
+    display: block;
+    position: absolute;
+    left: 290.375px;
+    top: 955.25px;
+    width: 63px;
+    height: 130px;
+    background: url(./images/e.png) no-repeat;
+    transform-origin: 17.8571428571429% 13.3653846153846%;
+    animation: ani_leg1 8s ease infinite;
+}
+
+
+.leg1 .jiojio{
+    display: block;
+    position: absolute;
+    background: url(./images/h.png) no-repeat;
+    left: 30px;
+    top: 112.5px;
+    width: 57px;
+    height: 44px;
+    transform: rotate(0deg);
+}
+
+@keyframes ani_leg1{
+    0%{
+        transform: rotate(0);
+    }
+    25%{
+        transform: rotate(108deg);
+    }
+    50%{
+        transform: rotate(0);
+    }
+    75%{
+        transform: rotate(108deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}
+
+@keyframes ani_leg2{
+    0%{
+        transform: rotate(0);
+    }
+    25%{
+        transform: rotate(-86deg);
+    }
+    50%{
+        transform: rotate(0);
+    }
+    75%{
+        transform: rotate(-86deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}
+
+.paras{
+    position: absolute;
+    left: 10%;
+    bottom: 110px;
+    line-height: 1.6667;
+    letter-spacing: 1px;
+    color: #333;
+}
+
+.para{
+    transition: all 1s ease;
+}
+
+.f-aniLineUp{
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.swiper-slide-active .f-aniLineUp{
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1.2s ease;
+}

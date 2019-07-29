@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>买房</title>
+</head>
+<body>
+    <script>
+        // 事件监听
+        // dom.addEventListener(event_type,callback)
+        // 事件 点击(事件触发了才会执行)才会执行? 注册 submit
+        // 发生时，body 广播出去，注册了事件的回调函数去执行
+        var saleoffice = {
+            name : '万达星城',
+
+        }
+        saleoffice.clientList = [] // 购房者
+        // saleoffice.clientList.push()
+        // 参数 fn 
+        saleoffice.listen = function(fn){
+            saleoffice.clientList.push(fn);
+        }
+        saleoffice.listen(function(price,squareMeter){
+            console.log(price,squareMeter);
+            if(price > 15000){
+                console.log('告辞');
+            }
+        })
+        
+        saleoffice.trigger = function(){
+            for(let i = 0; i < saleoffice.clientList.length ; i++){
+                typeof saleoffice.clientList[i] == 'function' ? saleoffice.clientList[i]
+                (2000*i,112*i):null
+            }
+        }
+
+        saleoffice.listen(function(price,squareMeter){
+            console.log(price,squareMeter);
+            if(squareMeter < 100){
+                console.log('太小了');
+            }else{
+                console.log('正合我意');
+                
+            }
+        })
+    </script>
+</body>
+</html>
