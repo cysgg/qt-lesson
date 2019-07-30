@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <ul class="info-list">
+        <li>
+            <a href="javascript:;" class="info" data-id="1">获取信息</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="info" data-id="2">获取信息</a>
+        </li>
+        <li>
+            <a href="javascript:;" class="info" data-id="3">获取信息</a>
+        </li>
+    </ul>
+    <div class="userinfo"></div>
+    <a href="javascript:;" id="info_a">Get student Info</a>
+    <script>
+        const infoA = document.querySelector('#info_a');
+        const getStudentInfo = function (event) {
+            // console.log(event.target);s
+            console.log(this === event.target);
+        }
+
+        infoA.addEventListener('click', getStudentInfo, false);
+
+        // document.querySelectorAll('.info').forEach(item=>{
+        //     item.addEventListener('click',(event)=>{
+        //         const id = event.target.dataset.id;
+        //         fetchStudentInfoByid(id)
+        //     })
+        // })
+
+        document.querySelector('.info-list')
+        .addEventListener('click',function(event){
+            console.log(this == event.target);
+            
+            const id = event.target.dataset.id;
+            fetchStudentInfoByid(id)
+        })
+
+        const renderStudent = (student)=>{
+            student.forEach(item=>{
+                document.querySelector('.userinfo').innerHTML = 
+                `
+                    <p>学号：${item.id}</p>
+                    <p>姓名：${item.username}</p>
+                `
+            })
+            
+        }
+        const fetchStudentInfoByid = (myid)=>{
+            fetch('/data.json')
+            .then(data=>data.json())
+            .then(data=>{
+                let info = data.students
+                .filter(item=>item.id == myid)
+
+                renderStudent(info)
+            })
+        }
+    </script>
+</body>
+
+</html>
