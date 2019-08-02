@@ -19,7 +19,7 @@ list.forEach(item => {
             let index = idx;
             oneip[index] = {}
             $(ele).find('td').each((idx, ele) => {
-                if (idx > 0 && idx < 4) {
+                if (idx > 0 && idx < 6 && idx != 4) {
                     let ty = ''
                     if(idx == 1){
                         ty = 'ip'
@@ -27,6 +27,8 @@ list.forEach(item => {
                         ty = 'port'
                     }else if(idx == 3){
                         ty = 'addr'
+                    }else if(idx == 5){
+                        ty = 'type'
                     }
                     oneip[index][ty]=$(ele).text().trim()
                 }

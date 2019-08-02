@@ -1,29 +1,28 @@
-;const superagent= require('superagent');
-
-const split = {
-    url : '',
-    getHtml(htmlurl = this.url,callback){
-        superagent.get(htmlurl).end((err, res) => {
-            if (err) {
-              console.log(`爬取失败 - ${err}`)
-            } else {
-                callback(res);
-            }
-          });
+;const request= require('request');
+const Split = {
+    downloadFile(url,filepath,ipdefaults = ''){
+        let r = request.defaults(ipdefaults?{'proxy': ipdefaults}:{});
+        r
+            .get(url)
+            .on('error', function(err) {
+                console.log('err')
+            })
+            .pipe(fs.createWriteStream(filepath))
     },
-    getLoopHtml(htmlurl,start,end,callback){ //htmlurl = `looparea`
-        let loopnum = end-start+1;
-        for(let i = 0 ; i < loopnum; i++){
-            let looparea = start + i;
-            superagent.get(htmlurl.replace('looparea',looparea)).end((err, res) => {
-                if (err) {
-                  console.log(`爬取失败 - ${err}`)
-                } else {
-                    callback(res,i);
-                }
-            });
-        }
+    gethtml(url,ipdefaults){
+        let r = request.defaults(ipdefaults?{'proxy': ipdefaults}:{});
+       
+        return new Promise((resolve,reject)=>{
+            r
+                .get(url)
+                .on('error', function(err) {
+                    reject(err)
+                })
+                .on('body', function(data) {
+                    resolve(data)
+                })
+        })
     }
 }
 
-module.exports = split;
+module.exports = Split;
