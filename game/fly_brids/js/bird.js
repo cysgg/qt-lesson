@@ -29,8 +29,8 @@ var bird = {
                 clearInterval(bird.flyTimer)
                 clearInterval(bird.wingTimer)
             }
-            if (bird.fallSpeed > 4) { // 下落限速
-                bird.fallSpeed = 4
+            if (bird.fallSpeed > 8) { // 下落限速
+                bird.fallSpeed = 8
             }
         }
     },

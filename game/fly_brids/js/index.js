@@ -3,9 +3,12 @@ var jsHeadTitle = document.getElementById('headTitle')
 var jsGrassLand1 = document.getElementById('grassLand1')
 var jsGrassLand2 = document.getElementById('grassLand2')
 var jsHeadBird = document.getElementById('headBird')
+var blocksArr = []
+var blockDistance = baseObj.randomNum(120,350)
 
-var landTime = setInterval(landRun,30)
+var landTime = setInterval(landRun,20)
 function landRun(){
+
     if(jsGrassLand1.offsetLeft <= -343){
         jsGrassLand1.style.left ='343px'
     }
@@ -14,6 +17,29 @@ function landRun(){
     }
     jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + 'px'
     jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + 'px'
+
+    if(blocksArr.length){
+        for (let i = 0; i < blocksArr.length; i++) {
+            blocksArr[i].moveBlock()
+            var x = baseObj.recttangleCrashExamine(blocksArr[i].downDivWrap,bird.div)
+            var y = baseObj.recttangleCrashExamine(blocksArr[i].upDivWrap,bird.div)
+            var z = bird.div.offsetTop >= 390
+            
+            if(x || y || z){
+                window.clearInterval(landTime)
+                bird.fallSpeed = 0
+                jsWrapBg.addEventListener('click',null)
+                jsWrapBg.addEventListener('keydown',null)
+            }
+            
+        }
+        if(blocksArr[blocksArr.length - 1].downDivWrap.offsetLeft < (450-blockDistance)){
+            blockDistance = baseObj.randomNum(130,250)
+            var newBlock = new Block()
+            newBlock.createBlock()
+            blocksArr.push(newBlock)
+        }
+    }
 }
 
 var Y = 3
@@ -41,9 +67,14 @@ jsStartBtn.addEventListener('click',()=>{
     jsWrapBg.addEventListener('click',()=>{
         bird.fallSpeed = -8
     })
-    // window.addEventListener('keydown',(event)=>{
-    //     if(event.keyCode == 32)
-    //     bird.fallSpeed = -8
-    // })
+    window.addEventListener('keydown',(event)=>{
+        if(event.keyCode == 32)
+        bird.fallSpeed = -8
+    })
+
+    var b = new Block()
+    b.createBlock()
+    blocksArr.push(b)
+    //开始出现管道了
 })
 

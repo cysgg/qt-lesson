@@ -38,6 +38,8 @@ const Save = {
         fs.writeFile(path.join(__dirname, filePath),'',{'flag': 'w+'},err=>{
             if (err) 
                 console.log('清空失败');
+            else
+                console.log('清空完成');
         })
     }
 }
