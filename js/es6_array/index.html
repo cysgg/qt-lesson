@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array = [1,2,1,1,'1'];
+        const set = new Set(array)
+        console.log(set.size);
+        
+        // function uniq(arr){
+        //     const res = []
+        //     return res;
+        // }
+        let arr = array.filter((v,i,a)=>{
+            return a.indexOf(v) === i
+        })
+        console.log(arr);
+        
+    </script>
+</body>
+</html>
