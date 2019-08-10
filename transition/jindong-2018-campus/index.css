@@ -1,0 +1,63 @@
+*{
+    margin: 0;padding: 0;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html{
+    font-size: 37.5px;
+}
+
+.main {
+    background-color: red;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-ran {
+    width: 1.90667rem;
+    height: 1.73333rem;
+    margin-top: 1.6rem;
+    background-size: 14.56rem 4.64rem;
+    text-indent: -133.32rem;
+    background-image: url(https://wqs.jd.com/promote/201707/2018campus/img/sprite.other_5adc1e.png);
+    background-position: -3.02667rem 0;
+}
+.text-slogon{
+    width: 5.73333rem;
+  height: 1.97333rem;
+  background-image: url(http://wqs.jd.com/promote/201707/2018campus/img/sprite.text_2b7b0a.png);
+  background-position: -31.73333rem 0;
+  margin-top: 5.65333rem;
+  -webkit-background-size: 51.58667rem 2.44rem;
+  background-size: 51.58667rem 2.44rem;
+}
+.logo-ran,.text-slogon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: -133.32rem;
+    margin-left: .85333rem;
+  }
+
+  .logo-ran{
+      animation: fadeInRight .5s .3s both;
+  }
+  .text-slogon{
+    animation: fadeInRight .5s .4s both;
+  }
+
+  @keyframes fadeInRight{
+      0%{
+          opacity: 0;
+          transform: translate3d(50%,0,0);
+      }
+      100%{
+          opacity: 1;
+          transform: none;
+      }
+  }
