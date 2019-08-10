@@ -39,9 +39,17 @@
             background-color: #333;
         }
         .col2{
+            display: block;
+            width: 100%;
             margin-right: 100px;
             background-color: red;
-            width: 100%;
+            color: #000;
+        }
+        .ga{
+            width: 95px;
+            height: 100px;
+            background-color: yellow;
+            float: left;
         }
     </style>
 </head>
@@ -50,7 +58,14 @@
     <div class="row">
         <!-- 将浮动列放前面 离开文档流 -->
         <div class="side"></div>
-        <div class="col2"></div>
+        <div class="col2">
+            <div class="ga">dasd</div>
+            <div class="ga">dasd</div>
+            <div class="ga">dasd</div>
+            <div class="ga">dasd</div>
+            <div class="ga">dasd</div>
+            <div class="ga">dasd</div>
+        </div>
     </div>
 </body>
 
