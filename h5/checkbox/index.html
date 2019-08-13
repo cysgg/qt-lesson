@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>check one div</p>
+        </div>
+    </div>
+    <script>
+        const checkboxs = document.querySelectorAll('.inbox input[type="checkbox"]')
+
+        checkboxs.forEach(checkbox=>{
+            checkbox.addEventListener('click',handleClick)
+        })
+        function handleClick(e){
+            if(e.shiftKey){
+                checkboxs.forEach(i=>{
+                    i.checked = this.checked
+                })
+            }
+        }
+    </script>
+</body>
+</html>
