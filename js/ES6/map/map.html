@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let map = new Map()
+        let box = document.getElementById('box')
+
+        map.set(box,'box')
+        console.log(map);
+        console.log(map.get(box));
+        
+        for(iv in map.entries() ){
+            console.log(iv);
+        }
+        
+        const map1 = {
+            [box] : 'box1'
+        }
+        console.log(map1);
+        
+    </script>
+</body>
+</html>
