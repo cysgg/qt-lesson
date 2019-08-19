@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webgl</title>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.min.js"></script>
+</head>
+
+<body>
+    <canvas id="webglcanvas"></canvas>
+    <script>
+        var canvas, // 3D 容器
+            camera, // 相机
+            scene, // 场景 摆放背，人物上场
+            group,
+            renderer;
+        var mouseX = 0,
+            moouseY = 0;
+        init();
+        animate();
+
+        function init() {
+            canvas = document.getElementById('webglcanvas');
+            // canvas.width = window.innerWidth
+            camera = new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,1,2000)
+            camera.position.z = 1000
+
+            scene = new THREE.Scene()
+            scene.background = new THREE.Color(0xffffff)
+            group = new THREE.Group();
+            scene.add(group);
+
+            var loader = new THREE.TextureLoader();
+            loader.load('land_ocean_ice_cloud_2048.jpg',texture=>{
+                //Shape
+                var geometry = new THREE.SphereGeometry(200,20,20)
+                var material = new THREE.MeshBasicMaterial({
+                    map:texture
+                })
+                var mesh = new THREE.Mesh(geometry,material)
+                group.add(mesh)
+            })
+
+            renderer = new THREE.WebGLRenderer({
+                canvas : canvas,
+                antialias : true
+            })
+            renderer.setSize(window.innerWidth,window.innerHeight)
+        }
+
+        function animate() {
+            // 60帧/s
+            requestAnimationFrame(animate)
+            render()
+        }
+
+        function render() {
+            camera.lookAt(scene.position)
+            renderer.render(scene,camera)
+        }
+    </script>
+</body>
+
+</html>
