@@ -18,7 +18,9 @@
             group,
             renderer;
         var mouseX = 0,
-            moouseY = 0;
+            mouseY = 0,
+            windowHalfX = window.innerWidth / 2,
+            windowHalfY = window.innerHeight / 2;
         init();
         animate();
         
@@ -26,7 +28,7 @@
             canvas = document.getElementById('webglcanvas');
             // canvas.width = window.innerWidth
             camera = new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,1,2000)
-            camera.position.z = 1000
+            camera.position.z = 500
 
             scene = new THREE.Scene()
             scene.background = new THREE.Color(0xffffff)
@@ -49,17 +51,28 @@
                 antialias : true
             })
             renderer.setSize(window.innerWidth,window.innerHeight)
+            document.addEventListener('mousemove',onDocumentMouseMove,false)
         }
 
         function animate() {
             // 60帧/s
+            // camera 拍 scene 场景 renderer 渲染
             requestAnimationFrame(animate)
             render()
         }
 
         function render() {
+            camera.position.x += (-mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
             camera.lookAt(scene.position)
             renderer.render(scene,camera)
+        }
+
+        function onDocumentMouseMove(e) {
+            console.log(e);
+            
+            mouseX = e.clientX -windowHalfX
+            mouseY = e.clientY -windowHalfY
         }
     </script>
 </body>
