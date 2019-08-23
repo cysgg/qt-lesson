@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!-- template {{userinfo.name}} mvvm 响应式编程 -->
+        <section>
+            <h3 id="title"></h3>
+            <p id="desc"></p>
+            <p id="date"></p>
+        </section>
+    </div>
+    <script>
+        fetch('/book.json')
+        .then(data=>data.json())
+        .then(data=>{
+            const {name,description,date} = data;
+            document.getElementById('title').innerText = name
+            document.getElementById('desc').innerText = description
+            document.getElementById('date').innerText = date
+        })
+    </script>
+</body>
+</html>
