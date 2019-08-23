@@ -16,3 +16,6 @@ checkEmail = checkByRegExp(emailReg)
   return function(){ 闭包 fn.len fn闭合
 
   }
+
+  require module.exports es5
+  模块化方案

@@ -15,4 +15,4 @@ let checkCellPhone = curry(checkByRegExp)(/1[3-9]\d{9}/)
 
 console.log(checkCellPhone('18379376564'));
 
-console.log(checkByRegExp(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,'456132465@@qq.com'));
+console.log(checkByRegExp(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,'123@@qq.com'));
