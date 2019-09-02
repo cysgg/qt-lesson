@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>${msg}</p>
+        <button @click="add">add</button>
+    </div>
+    <script>
+        var ext = {
+            created() {
+                console.log('我是野生的created');
+
+            },
+            methods: {
+                add() {
+                    console.log('我是野生的方法');
+                }
+            },
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg:132
+            },
+            methods: {
+                aa() {
+                    console.log('我是原生的方法');
+                }
+            },
+            created() {
+                console.log('我是原生的created');
+
+            },
+            extends : ext,
+            delimiters : ['${','}']
+        })
+    </script>
+</body>
+
+</html>
