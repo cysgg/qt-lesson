@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>星空</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        body{
+            background: linear-gradient(to bottom, #000000 0%, #5788fe 100%)
+        }
+        .landscape{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url(http://www.jq22.com/css/img/xkbg.png);
+            background-position: center bottom;
+            background-repeat: repeat-x;
+            background-size: 1000px 250px;
+            z-index: 3;
+        }
+        .filter{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #fe5757;
+            animation: colorChange 30s ease-in-out infinite;
+            animation-fill-mode: both;
+            mix-blend-mode: overlay;
+        }
+        @keyframes colorChange {
+            0%,100%{
+                opacity: 0;
+            }
+            50%{
+                opacity: .7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landscape">
+
+    </div>
+    <div class="filter"></div>
+    <canvas id="canvas"></canvas>
+    <script src="./round_item.js"></script>
+    <script>
+        let canvas = document.getElementById('canvas'),
+        cxk = canvas.getContext('2d'),
+        initRoundPopulation = 80,
+        round = [];
+        const WIDTH = document.documentElement.clientWidth,
+        HEIGHT = document.documentElement.clientHeight;
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT
+
+        init();
+        animate();
+
+        function init(){
+            for(let i = 0 ; i< initRoundPopulation; i++){
+                round[i] = createNewRound(i,Math.random() *WIDTH,Math.random() * HEIGHT,cxk)
+                round[i].draw();
+            }
+        }
+        function createNewRound(i,w,h,cxk){
+            return new RoundItem(i,w,h,cxk)
+        }
+        function animate(){
+            cxk.clearRect(0,0,WIDTH,HEIGHT)
+            for(let star of round){
+                star.move()
+                removeAndNew
+                star.draw()
+            }
+            requestAnimationFrame(animate)
+        }
+        function removeAndNew(){
+            round.forEach((v,i)=>{
+                if(v.x < 0){
+                    round.splice(i,1,createNewRound(i,WIDTH,Math.random() * HEIGHT,cxk))
+                }
+            })
+        }
+
+
+    </script>
+</body>
+</html>
