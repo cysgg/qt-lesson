@@ -6,21 +6,21 @@
       background-color="#eeeeee"
       class="el-menu-vertical-demo"
     >
-      <el-menu-item index="/home">
+      <el-menu-item index="/main/home">
         <i class="el-icon-s-home"></i>
         <span>首页</span>
       </el-menu-item>
-      <el-menu-item index="/userManage">
+      <el-menu-item index="/main/userManage">
         <i class="el-icon-menu"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
-      <el-submenu index="/userManage">
+      <el-submenu index="/main/userManage">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>用户管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="1-1">用户列表</el-menu-item>
+          <el-menu-item index="/main/List">用户列表</el-menu-item>
           <el-menu-item index="1-2">用户信息</el-menu-item>
         </el-menu-item-group>
       </el-submenu>

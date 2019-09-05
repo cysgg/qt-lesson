@@ -1,6 +1,8 @@
 <template>
-  <div class="hello">
+  <div class="look">
     <h1>{{ msg }}</h1>
+    {{$route.params.id}}
+    <router-view></router-view>
   </div>
 </template>
 
@@ -9,7 +11,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: '看一看页面'
     }
   }
 }
