@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Debounce</title>
+</head>
+
+<body>
+  <div>
+    <label for="unDebounce">没有防抖的input</label>
+    <input type="text" id="unDebounce">
+  </div>
+  <div>
+    <label for="Debounce">防抖的input</label>
+    <input type="text" id="Debounce">
+  </div>
+  <script>
+    let inputA = document.getElementById('unDebounce')
+    let inputDebounce = document.getElementById('Debounce')
+
+    let debounceAjax = debounce(ajax,500);
+    
+    inputA.addEventListener('keyup', function (e) {
+      let value = e.target.value
+      ajax(value)
+    })
+
+    inputDebounce.addEventListener('keyup',function(e){
+      //防抖的函数
+      // 最后执行ajax return Ajax 高阶函数
+      debounceAjax(e.target.value)
+    })
+
+    function debounce(fn,delay){
+      //高阶函数 参数是函数 或者返回是函数
+      let timer = null
+      return function(...args){
+        clearTimeout(timer)
+        timer = setTimeout(()=>{
+          fn.apply(this,args)
+        },delay)
+      }
+    }
+
+    //search suggestion
+    function ajax(content) {
+      console.log(content);
+      let value = decodeURIComponent(content)
+      let str =
+        `https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&rsv_idx=1&tn=baidu&wd=${value}&oq=a&rsv_pq=e59add7f0010730f&rsv_t=26efHYANGrZAAsM4Nfvc2PphomKr3bRcR7L0uDUpLt4EIUiFUWivRiC1R4U&rqlang=cn&rsv_enter=0&rsv_dl=ts_0&inputT=2113&rsv_sug3=113&rsv_sug1=47&rsv_sug7=101&rsv_sug2=0&prefixsug=ss&rsp=0&rsv_sug4=2656`
+      // console.log(str);
+
+    }
+  </script>
+</body>
+
+</html>
