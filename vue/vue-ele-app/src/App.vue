@@ -26,7 +26,10 @@ export default {
     }
   },
   created () {
-    this.$http.get('https://www.easy-mock.com/mock/5d721c3f9aaed00b9c3bde5c/vue_ele_app/vue_ele_app')
+    this.$http({
+      method: 'get',
+      baseURL: 'seller'
+    })
       .then(res => {
         console.log(res)
         if (res.data.errno === 0) {
