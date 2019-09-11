@@ -6,13 +6,13 @@
         <router-link tag="span" to="/goods">商品</router-link>
       </div>
       <div class="tab-item">
-        <router-link tag="span" to="/ratings">评论</router-link>
+        <router-link tag="span" to="/comments">评论</router-link>
       </div>
       <div class="tab-item">
         <router-link tag="span" to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view/>
+    <router-view :seller="seller"/>
   </div>
 </template>
 

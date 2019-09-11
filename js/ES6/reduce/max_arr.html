@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [0,9,3,7]
+    
+    console.log(getMax(arr));
+    function getMax(arr){
+      let max = arr[0]
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] > max && (max = arr[i])
+      }
+      return max
+    }
+    let max1 = arr.reduce((p,n)=>{
+      if(n>p){
+        return n
+      }
+      return p
+    })
+    console.log(max1);
+    
+
+    function isSXHNum(params) {
+      let numStr = params.toString()
+      let len = numStr.length
+      let sum = 0
+      for (const num of numStr) {
+        sum += Math.pow(Number(num),len)
+      }
+      return sum === Number(numStr)
+    }
+    console.log(isSXHNum(153));
+    
+  </script>
+</body>
+</html>

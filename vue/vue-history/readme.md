@@ -19,3 +19,5 @@
 
   bind 返回一个新的函数
   call apply传入参数 返回函数的结果
+
+# Vue React SPA Single Page Application 应用体验更好， 页面会白一下

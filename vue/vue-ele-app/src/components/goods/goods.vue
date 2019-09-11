@@ -3,13 +3,8 @@
     <div class="goods">
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <li
-            v-for="(item,index) in goods"
-            :key="index"
-            class="menu-item"
-            @click="selectMenu(index, $event)"
-            :class="{'current' : currentIndex === index}"
-          >
+          <li v-for="(item,index) in goods" :key="index" class="menu-item"
+           @click="selectMenu(index, $event)" :class="{'current': currentIndex === index}">
             <span class="text border-1px">
               <span class="icon" :class="classMap[item.type]" v-if="item.type > 0"></span>
               {{item.name}}
@@ -19,20 +14,12 @@
       </div>
       <div class="foods-wrapper" ref="foodsWrapper">
         <ul>
-          <li
-            v-for="(item,index) in goods"
-            :key="index"
-            class="food-list"
-          >
+          <li v-for="(item, index) in goods" :key="index" class="food-list" ref="foodList">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li
-                v-for="(food, index) in item.foods"
-                :key="index"
-                class="food-item border-1px"
-              >
+              <li v-for="(food, index) in item.foods" :key="index" class="food-item border-1px">
                 <div class="icon">
-                  <img :src="food.icon" width="57" height="57" alt="">
+                  <img :src="food.icon" alt="" width="57" height="57">
                 </div>
                 <div class="content">
                   <h2 class="name">{{food.name}}</h2>
@@ -45,7 +32,9 @@
                     <div class="now">￥{{food.price}}</div>
                     <div class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</div>
                   </div>
-                <div class="cartcontorl-wrapper">+</div>
+                  <div class="cartcontrol-wrapper">
+                    <cart-control :food="food" @add="addFood"></cart-control>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -53,19 +42,64 @@
         </ul>
       </div>
       <!-- 购物车 -->
+      <shop-cart
+        :selectFoods="selectFoods"
+        :deliveryPrice="seller.deliveryPrice"
+        :minPrice="seller.minPrice"
+        ></shop-cart>
     </div>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
+import shopcart from '@/components/shopcart/shopcart'
 export default {
   name: 'goods',
+  components: {
+    'cart-control': cartcontrol,
+    'shop-cart': shopcart
+  },
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data () {
     return {
       goods: [],
       classMap: [],
-      currentIndex: '0'
+      listHeight: [],
+      scrollY: 0
+    }
+  },
+  computed: {
+    selectFoods () {
+      let foods = []
+      this.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          if (food.count) {
+            foods.push({
+              count: food.count,
+              price: food.price
+            })
+          }
+        })
+      })
+      return foods
+    },
+    currentIndex () {
+      let ls = this.listHeight
+      let sy = this.scrollY
+      for (let i = 0; i < ls.length; i++) {
+        let h1 = ls[i]
+        let h2 = ls[i + 1]
+        if (!h2 || (sy >= h1 && sy < h2)) {
+          return '' + i
+        }
+      }
+      return '' + 0
     }
   },
   methods: {
@@ -73,14 +107,34 @@ export default {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
       })
-      this.menuScroll = new BScroll(this.$refs.foodsWrapper, {
-        click: true
+      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        click: true,
+        probeType: 3
+      })
+      this.foodsScroll.on('scroll', pos => {
+        this.scrollY = Math.abs(Math.round(pos.y))
       })
     },
     selectMenu (index, event) {
       console.log(index, event)
-      this.currentIndex = index
+      // this.currentIndex = index
       // if (event.hasOwn)
+      let foodList = this.$refs.foodList
+      let el = foodList[index]
+      this.foodsScroll.scrollToElement(el, 300)
+    },
+    _calculateHeight () {
+      let foodList = this.$refs.foodList
+      let height = 0
+      this.listHeight.push(height)
+      for (let i = 0; i < foodList.length; i++) {
+        const item = foodList[i]
+        height += item.clientHeight
+        this.listHeight.push(height)
+      }
+    },
+    addFood (e) {
+      console.log(e)
     }
   },
   created () {
@@ -91,10 +145,11 @@ export default {
     }).then(res => {
       console.log(res)
       if (res.data.errno === 0) {
-        this.goods = Object.assign({}, this.goods, res.data.data)
+        this.goods = this.goods.concat(res.data.data)
         // 页面渲染完成才会执行
         this.$nextTick(() => {
           this._initScroll()
+          this._calculateHeight()
         })
       }
     })
@@ -103,7 +158,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../../common/stylus/mixin';
+@import '../../common/stylus/mixin.styl'
 .goods
   display flex
   position absolute
@@ -142,16 +197,25 @@ export default {
           margin-right 2px
           background-size 12px 12px
           background-repeat no-repeat
-          &.decrease
-            bg-image('./goods/decrease_3')
-          &.discount
-            bg-image('./goods/discount_3')
-          &.guarantee
-            bg-image('./goods/guarantee_3')
-          &.invoice
-            bg-image('./goods/invoice_3')
-          &.special
-            bg-image('./goods/special_3')
+          &.decrease {
+            bg-image('./goods/decrease_3');
+          }
+
+          &.discount {
+            bg-image('./goods/discount_3');
+          }
+
+          &.guarantee {
+            bg-image('./goods/guarantee_3');
+          }
+
+          &.invoice {
+            bg-image('./goods/invoice_3');
+          }
+
+          &.special {
+            bg-image('./goods/special_3');
+          }
   .foods-wrapper
     flex 1
     .title
@@ -207,5 +271,4 @@ export default {
           position absolute
           right 0
           bottom 12px
-
 </style>
