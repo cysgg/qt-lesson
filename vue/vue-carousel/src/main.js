@@ -2,24 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
-import axios from 'axios'
-import moment from 'moment'
-
-import './common/stylus/index.styl'
-
-Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
-
-Vue.filter('datefmt', function (input, fmtstring) {
-  return moment(input).format(fmtstring)
-})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   components: { App },
   template: '<App/>'
 })

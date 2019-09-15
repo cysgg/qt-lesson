@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+      <a href="/page1">page1</a>
+      <a href="/page2">page2</a>
+      <a href="/page3">page3</a>
+      <a href="/page4">page4</a>
+      <a href="/page5">page5</a>
+    </div>
+    <div id="container">
+
+    </div>
+    <script>
+      var container = document.getElementById('container')
+      class HistoryRouter {
+        constructor () {
+          this.router = {}
+          this.listenLink()
+        }
+        register (path, callback = function(){}) {
+          this.router[path] = callback
+        }
+        listenLink () {
+          window.addEventListener('click', e => {
+            console.log('sad');
+            let dom = e.target
+            if(dom.tagName.toUpperCase() === 'A' && dom.getAttribute('href')){
+              e.preventDefault()
+              console.log(dom.getAttribute('href'));
+              
+              this.assign(dom.getAttribute('href'))
+            }
+          }, false)
+        }
+        assign (path) {
+          history.pushState({path}, null, path)
+          this.dealPathHandler(path)
+        }
+        dealPathHandler (path) {
+          let handler = this.router[path]
+          handler.apply(this)
+        }
+      }
+      let route = new HistoryRouter()
+      route.register('/page1', () => {
+        container.innerHTML = '我是page1'
+      })
+      route.register('/page2', () => {
+        container.innerHTML = '我是page2'
+      })
+      route.register('/page3', () => {
+        container.innerHTML = '我是page3'
+      })
+    </script>
+</body>
+</html>

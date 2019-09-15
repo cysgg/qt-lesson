@@ -10,29 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/seller': {
-        target: 'http://127.0.0.1:8080/static/json/seller.json',//目标接口域名
-        changeOrigin: true,//是否跨域
-        pathRewrite: {
-          '^/seller': ''//重写接口,后面可以使重写的新路径，一般不做更改
-        }
-      },
-      '/goods': {
-        target: 'http://127.0.0.1:8080/static/json/goods.json',//目标接口域名
-        changeOrigin: true,//是否跨域
-        pathRewrite: {
-          '^/goods': ''//重写接口,后面可以使重写的新路径，一般不做更改
-        }
-      },
-      '/ratings': {
-        target: 'http://127.0.0.1:8080/static/json/ratings.json',//目标接口域名
-        changeOrigin: true,//是否跨域
-        pathRewrite: {
-          '^/ratings': ''//重写接口,后面可以使重写的新路径，一般不做更改
-        }
-      }
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -42,14 +20,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    // Use Eslint Loader?
-    // If true, your code will be linted during bundling and
-    // linting errors and warnings will be shown in the console.
-    useEslint: true,
-    // If true, eslint errors and warnings will also be shown in the error overlay
-    // in the browser.
-    showEslintErrorsInOverlay: false,
-
+    
     /**
      * Source Maps
      */
