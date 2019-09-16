@@ -1,21 +1,15 @@
-# vue-toast-component
+## 弹出类 
+1. html 结构
+  和页面主体内容 同级，不应该嵌套在页面里面
 
-> A Vue.js project
+#面向对象
+  编程范式
+  解决一类问题
 
-## Build Setup
+  Vue 组件
+  实际上 是一个 构造函数
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+  手动拿到 Toast 构造函数
+  生成一个 Toast 的实例
+  Vue extend()
+  生成了一个Toast 的实例

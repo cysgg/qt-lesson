@@ -1,19 +1,13 @@
 <template>
   <div>
     <button @click="handleToast">购买</button>
-    <toast :msg="'测试弹窗'" 
-      :visiable="visiable"
-      />
   </div>
 </template>
 
 <script>
-import Toast from './Toast/index'
+import showMessage from '@/components/Toast/index.js'
 export default {
   name: 'HelloWorld',
-  components: {
-    Toast
-  },
   data () {
     return {
       visiable: false
@@ -21,10 +15,7 @@ export default {
   },
   methods: {
     handleToast () {
-      this.visiable = true
-      setTimeout(() => {
-        this.visiable = false
-      },3000)
+      showMessage('没到发售时间')
     }
   },
 }
