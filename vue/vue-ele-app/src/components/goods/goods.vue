@@ -33,7 +33,7 @@
                     <div class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</div>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <cart-control :food="food" @add="addFood"></cart-control>
+                    <cart-control  :food="food" @add="addFood"></cart-control>
                   </div>
                 </div>
               </li>
@@ -135,6 +135,12 @@ export default {
     },
     addFood (e) {
       console.log(e)
+      this._drop(e)
+    },
+    _drop (target) {
+      this.$nextTick(() => {
+        this.$refs.shopcart.drop(target)
+      })
     }
   },
   created () {
