@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MVVM</title>
+</head>
+<body>
+  <!-- View -->
+  <span id="container">1</span>
+  <button id="button">点击加一</button>
+  <script>
+  // Model
+    let obj = { // Model
+      value: 1
+    }
+    let value = 1
+
+    Object.defineProperty(obj,'value',{
+      get() {
+        return value
+      },
+      set(newValue) {
+        value = newValue
+        document.getElementById('container').innerHTML = newValue
+      }
+    })
+  </script>
+</body>
+</html>
