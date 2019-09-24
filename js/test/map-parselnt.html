@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const {log} = console
+    // 函数是一等公民 和其他变量有同等地位
+    function foo (a, b) {
+      log(a);
+      b()
+    }
+    function bar () {log(456)}
+    foo(1, bar)
+    const map = ['1','2','3'].map(parseInt)
+    log(map);
+    const map1 =  ['1','2','3'].map((v,i) => parseInt(v,i))
+    log(map1);
+    log(parseInt('',2));
+    log(parseInt('00000',1))
+  </script>
+</body>
+</html>

@@ -31,6 +31,30 @@ export function fetchGet (url, params) {
 export default {
   //用户登录
   Login (params) {
-    return fetchGet('/login/cellphone',params)
+    return fetchGet('/login', params)
+  },
+  // 歌单
+  DiscLists (params) {
+    return fetchGet('/top/playlist', params)
+  },
+  //歌曲详情
+  SongList (params) {
+    return fetchGet('.playlist/detail', params)
+  },
+  // 歌曲搜素
+  MusicSearch (param) {
+    return fetchGet('search', params)
+  },
+  //热搜
+  HotSearchKey () {
+    return fetchGet('/search/hot')
+  },
+  //歌词
+  MusicLyric (id) {
+    return fetchGet('/lyric', {id})
+  },
+  // 歌曲资源
+  MusicUrl (id) {
+    return fetchGet('/song/url', {id})
   }
 }
