@@ -1,7 +1,7 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import axios from 'axios'
 
-const vue = new Vue()
+// const vue = new Vue()
 
 // axios 的配置
 axios.defaults.timeout = 10000
@@ -11,9 +11,9 @@ axios.defaults.baseUrl = 'http://localhost:3000'
 axios.interceptors.response.use(res => {
   if (res.data.code !== 200) {
     alert('网络异常')
-    return Promise.reject()
+    return Promise.reject(new Error('err'))
   }
-},err => {
+}, err => {
   alert('网络异常')
   return Promise.reject(err)
 })
@@ -23,13 +23,13 @@ export function fetchGet (url, params) {
     axios.get(url, {
       params
     })
-    .then(resolve,reject)
-    .catch(reject)
+      .then(resolve, reject)
+      .catch(reject)
   })
 }
 
 export default {
-  //用户登录
+  // 用户登录
   Login (params) {
     return fetchGet('/login', params)
   },
@@ -37,19 +37,19 @@ export default {
   DiscLists (params) {
     return fetchGet('/top/playlist', params)
   },
-  //歌曲详情
+  // 歌曲详情
   SongList (params) {
     return fetchGet('.playlist/detail', params)
   },
   // 歌曲搜素
-  MusicSearch (param) {
+  MusicSearch (params) {
     return fetchGet('search', params)
   },
-  //热搜
+  // 热搜
   HotSearchKey () {
     return fetchGet('/search/hot')
   },
-  //歌词
+  // 歌词
   MusicLyric (id) {
     return fetchGet('/lyric', {id})
   },
