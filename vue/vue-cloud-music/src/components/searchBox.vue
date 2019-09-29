@@ -7,9 +7,8 @@
 </template>
 
 <script>
-import {debounce} from '@/common/util'
+import { debounce } from '@/common/util'
 export default {
-  name: 'searchBox',
   props: {
     placeholder: {
       type: String,
@@ -21,21 +20,21 @@ export default {
       query: ''
     }
   },
-  created () {
-    this.$watch('query', debounce((newQuery) => {
-      this.$emit('query', newQuery)
-    }, 500))
-  },
   methods: {
     clear () {
       this.query = ''
     },
-    setQuery (query) {
+    setQuery (query) { // 记录浏览历史
       this.query = query
     },
-    blur () {
+    blur () { // 失去焦点
       this.$refs.query.blur()
     }
+  },
+  created () {
+    this.$watch('query', debounce((newQuery) => {
+      this.$emit('query', newQuery)
+    }, 500))
   }
 }
 </script>

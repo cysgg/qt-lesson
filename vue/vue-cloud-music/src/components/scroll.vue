@@ -8,9 +8,7 @@
 import BScroll from 'better-scroll'
 const DIRECTION_H = 'horizontal'
 const DIRECTION_V = 'vertical'
-
 export default {
-  name: 'scroll',
   props: {
     /**
       * 1 滚动的时候会派发scroll事件，会节流。
@@ -73,17 +71,23 @@ export default {
       default: DIRECTION_V
     }
   },
+  mounted () {
+    setTimeout(() => {
+      this._initScroll()
+    }, 20)
+  },
   methods: {
     _initScroll () {
-      if (!this.refs.wrapper) {
+      if (!this.$refs.wrapper) {
         return
       }
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: this.click,
-        probeType: this.probetype,
+        probeType: this.probeType,
         eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
       })
-      // 是否派发滚动事件
+
+      // 是否派发滚动事件 上拉加载更多
       if (this.listenScroll) {
         this.scroll.on('scroll', (pos) => {
           this.$emit('scroll', pos)
@@ -137,12 +141,7 @@ export default {
       this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
     }
   },
-  mounted () {
-    setTimeout(() => {
-      this._initScroll()
-    }, 20)
-  },
-  watch: {
+  watch: { // 监听
     data () {
       setTimeout(() => {
         this.refresh()

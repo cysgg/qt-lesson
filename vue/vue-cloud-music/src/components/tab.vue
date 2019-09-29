@@ -9,7 +9,7 @@
     <router-link tag="div" class="tab-item" to="/rank">
       <span class="tab-link">排行</span>
     </router-link>
-    <router-link tag="div" class="tab-item on" to="/search">
+    <router-link tag="div" class="tab-item" to="/search">
       <span class="tab-link">搜索</span>
     </router-link>
   </div>
@@ -21,17 +21,18 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import '../assets/css/function';
+<style scoped lang="stylus">
+@import '../assets/css/function'
 .tab
   display flex
+  height px2rem(88px)
   line-height px2rem(88px)
   font-size 14px
-  height px2rem(88px)
-  &-item
-    color hsla(0, 0%, 100%, .5)
+  color #ffffff
+  .tab-item
     flex 1
     text-align center
+    color hsla(0, 0%, 100%, 0.5)
     .tab-link
       padding-bottom 5px
     &.router-link-active

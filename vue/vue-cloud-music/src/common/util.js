@@ -1,11 +1,11 @@
-export function debounce (fn, delay) {
+export function debounce (func, delay) {
   let timer = null
   return function (...args) {
     if (timer) {
       clearTimeout(timer)
     }
     timer = setTimeout(() => {
-      fn.apply(this, args)
+      func.apply(this, args)
     }, delay)
   }
 }

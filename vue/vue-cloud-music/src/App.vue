@@ -1,28 +1,34 @@
 <template>
   <div id="app">
+    <!-- 头部 -->
     <v-header>
-     <i class="icon" slot="left-icon">&#xe692;</i>
-     <span class="content" slot="content">我的音乐</span>
-     <router-link slot="right-icon" to="/user">
-       <i class="icon">&#xe63c;</i>
+      <i class="icon" slot="left-icon">&#xe692;</i>
+      <span slot="content">My Music</span>
+      <router-link slot="right-icon" to="/user">
+        <i class="icon" >&#xe63c;</i>
       </router-link>
     </v-header>
-    <v-sidevar></v-sidevar>
+    <!-- 侧边栏 -->
+    <v-sidebar></v-sidebar>
+    <!-- tab导航 -->
     <v-tab></v-tab>
     <router-view/>
+    <v-play></v-play>
   </div>
 </template>
 
 <script>
-import vheader from '@/components/header'
+import header from '@/components/header'
 import sidebar from '@/components/sidebar'
 import tab from '@/components/tab'
+import play from '@/components/play'
 export default {
   name: 'App',
   components: {
-    'v-header': vheader,
-    'v-sidevar': sidebar,
-    'v-tab': tab
+    'v-header': header,
+    'v-sidebar': sidebar,
+    'v-tab': tab,
+    'v-play': play
   }
 }
 </script>
@@ -49,4 +55,6 @@ html,body
   -webkit-tap-highlight-color transparent
   background rgba(8, 5, 58, 0.9)
   color #fff
+a
+  text-decoration none
 </style>

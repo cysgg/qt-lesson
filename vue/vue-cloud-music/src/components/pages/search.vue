@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <div class="search-box-wrapper">
-      <search-box @query="onQueryChange" ref="searchBox"></search-box>
+      <v-searchBox @query="onQueryChange" ref="searchBox"></v-searchBox>
     </div>
     <div class="shortcut-wrapper" ref="shortcutWrapper" v-show="!query">
       <v-scroll class="shortcut" ref="shortcut" :data="shortcut" :refreshDelay="refreshDelay">
@@ -16,61 +16,62 @@
             </ul>
           </div>
           <!-- 搜索历史 -->
-          <div v-show="searchHistory.length" class="search-history">
+          <div class="search-history" v-show="searchHistory.length">
             <h1 class="title">
-              <span class="text">搜索历史</span>
+              <span class="taxt">搜索历史</span>
               <span class="clear">
                 <i class="icon">&#xe612;</i>
               </span>
             </h1>
             <!-- 搜索历史列表 -->
-            <search-list :searches="searchHistory" @select="addQuery" @delete="delQuery"></search-list>
+            <v-searchlist :searches="searchHistory" @select="addQuery"></v-searchlist>
           </div>
         </div>
       </v-scroll>
     </div>
     <!-- 搜索结果 -->
-    <div class="search-resul" v-show="query" ref="searchResult">
+    <div class="search-result" v-show="query" ref="searchResult">
+      <v-suggest :query="query"></v-suggest>
     </div>
   </div>
 </template>
 
 <script>
-// import { MusicSearch } from '@/api/index.js'
 import searchBox from '@/components/searchBox'
 import scroll from '@/components/scroll'
 import searchList from '@/components/searchList'
+import suggest from '@/components/suggest'
 export default {
-  name: 'search',
   data () {
     return {
-      query: '',
       shortcut: [],
-      refreshDelay: 0,
+      refreshDelay: 1,
       hotKey: [
-        {first: '要放假了'},
-        {first: '要放假了ad'},
-        {first: '要放假了ggg'}
+        { first: '要放假了' },
+        { first: '要放假了x' },
+        { first: '要放假了a' }
       ],
-      searchHistory: [1]
+      searchHistory: [1],
+      query: ''
     }
   },
   components: {
-    searchBox,
+    'v-searchBox': searchBox,
     'v-scroll': scroll,
-    searchList
+    'v-searchlist': searchList,
+    'v-suggest': suggest
   },
   methods: {
-    onQueryChange (val) {
+    onQueryChange (event) {
+      this.query = event
     },
-    addQuery (item) {},
-    delQuery (item) {}
+    addQuery () {}
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-@import '../assets/css/function'
+<style scoped lang="stylus">
+@import '../../assets/css/function'
 .search
   overflow hidden
   &-box-wrapper
@@ -88,11 +89,11 @@ export default {
         .title
           margin-bottom px2rem(40px)
           font-size 14px
-          color hsla(0, 0%, 100%, .5)
+          color hsla(0, 0%, 100%, 0.5)
         .item
           display inline-block
-          padding px2rem(16px) px2rem(20px)
-          margin px2rem(10px)
+          padding px2rem(10px) px2rem(20px)
+          margin 0 px2rem(20px) px2rem(20px) 0
           border-radius 6px
           font-size 14px
           color hsla(0, 0%, 100%, 0.3)
