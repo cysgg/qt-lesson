@@ -9,3 +9,7 @@ export function debounce (func, delay) {
     }, delay)
   }
 }
+
+export function findIndex (list, song) {
+  return list.findIndex(item => item.id === song.id)
+}

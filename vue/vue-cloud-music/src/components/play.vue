@@ -104,10 +104,12 @@
 
 <script>
 import scroll from '@/components/scroll'
+import { mapMutations, mapGetters } from 'vuex'
+import api from '@//api'
+
 export default {
   data () {
     return {
-      playList: [1],
       currentTime: 0,
       duration: 0,
       playingLyric: '我叹服你的技巧',
@@ -115,14 +117,28 @@ export default {
       isPureMusic: false,
       currentLyric: null,
       currentLineNum: 0,
-      currentShow: 'cd',
-      playing: true
+      currentShow: 'cd'
     }
   },
   components: {
     'v-scroll': scroll
   },
+  watch: {
+    currentSong (nv, ov) {
+
+    },
+    playing (nv, ov) {
+      if (!this.songReady) {
+        return;
+      }
+      const audio = this.$refs.audio
+      this.$nextTick(() => {
+        nv ? audio.play() : audio.pause()
+      })
+    }
+  },
   computed: {
+    ...mapGetters(['fullScreen', 'playList', 'playing', 'currentIndex']),
     cdCls () {
       return this.playing ? 'play' : ''
     },
@@ -131,12 +147,17 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setFullScreen: 'SET_FULL_SCREEN'
+    }),
     enter () {},
     afterEnter () {},
     leave () {},
     afterLeave () {},
     currentSong () {},
-    back () {},
+    back () {
+      this.setFullScreen(false)
+    },
     middleTouchEnd () {},
     changeMode () {},
     prev () {},
