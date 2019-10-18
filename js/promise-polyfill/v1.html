@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function MyPromist (executor) {
+      var self = this
+      self.status = 'pending'
+      function resolve(val) {
+        console.log(val)
+        self.status = 'resolved'
+        self.data = val
+      }
+      function reject() {}
+      executor(resolve, reject)
+    }
+    MyPromist.prototype.then = function (onResolve) {
+      onResolve(this.data)
+    }
+  </script>
+</body>
+</html>

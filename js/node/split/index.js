@@ -9,13 +9,16 @@ const cheerio = require('cheerio')
     
 //   }
 // });
-let url = 'http://www.nitianxieshen.com/2.html'
-split.Split.getHtml(url,res=>{
+let url = 'https://www.mafengwo.cn'
+console.log(split)
+
+split.gethtml(url,res=>{
   savetxt(res)
 })
 
 
 let savetxt = (res) => {
+  console.log(res)
   let $ = cheerio.load(res.text);
   txtlines = $('div.post_entry').contents();
   let textarr = [];
