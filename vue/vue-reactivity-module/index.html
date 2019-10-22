@@ -11,9 +11,9 @@
     <div id="box1"></div>
     <div id="box2"></div>
   </div>
-  <script src="./reactivity.global.js"></script>
-  <script>
-    const { reactive, effect } = VueObserver
+  <script type="module">
+    import { reactive } from './my-reactivity/reactive.js'
+    import { effect } from './my-reactivity/effect.js'
     const origin = {
       count: 0,
       age: 50,
