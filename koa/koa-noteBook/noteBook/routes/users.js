@@ -15,7 +15,7 @@ router.get('/all', async function (ctx, next) {
   console.log('1')
   let userInfo = await userService.getAllUsers()
   console.log('打印结果', JSON.stringify(userInfo))
-  ctx.body = 'this is a users/bar response'
+  ctx.body = JSON.stringify(userInfo)
 })
 
 module.exports = router

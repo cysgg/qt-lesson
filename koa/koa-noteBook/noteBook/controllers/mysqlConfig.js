@@ -1,7 +1,7 @@
 var mysql = require('mysql')
 var config = require('./defaultConfig')
 
-var pooll = mysql.createPool({
+var pool = mysql.createPool({
     host: config.datebase.HOST,
     user: config.datebase.USERNAME,
     password: config.datebase.PASSWORD,
@@ -13,7 +13,7 @@ var pooll = mysql.createPool({
   let allServies = {
     query: function (sql, values) {
       return new Promise((resolve, reject) => {
-        pooll.getConnection(function (err, connection) {
+        pool.getConnection(function (err, connection) {
           if (err) {
             return reject(err)
           } else {
