@@ -1,9 +1,12 @@
 const http = require('http');
 
 http.createServer((req, res) => {
-  if (req.url === '/api/books') {
+  let url = require('url').parse(req.url)
+  console.log(url)
+ if (url.pathname = '/api/books') {
+    const methodName = url.query.split('=')[1]
     let list = [ { book: 'book2'} ];
-    res.end(`getBook(${JSON.stringify(list)})`);
+    res.end(`${methodName}(${JSON.stringify(list)})`);
   }
 })
 .listen(3002, () => {
