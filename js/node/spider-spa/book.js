@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer')
 const $ = require('cheerio')
-const url = 'https://www.dongqiudi.com/'
+const baseUrl = 'https://www.mafengwo.cn'
 const fs = require('fs')
 
 
@@ -10,45 +10,60 @@ async function run() {
     });
     const page = await browser.newPage();
     // await page.setDefaultNavigationTimeout(100000);
-    await page.goto(url, {
+    await page.goto(baseUrl + '/gonglve/mdd-sc-0-0-1.html#list', {
         waitUntil: 'networkidle2'
     });
     let html = await page.content()
-    let wrap = $('.home-wrap', html)
-    let List= []
-    console.log(wrap.find('.match-list').length);
-    
-    wrap.find('.match-list').each((i, match) => {
-        let date = $(match).find('.date').text().trim()
-        let matchList = []
-        $(match).find('.match-item').each((index, item) => {
-            let time =  $(item).find('.start-min').text()
-            let match_type = $(item).find('.round').text()
-            let team_a_name = $(item).find('.team-a .teama-name').text()
-            let team_a_img = $(item).find('.team-a img').attr('src')
-            let team_b_name = $(item).find('.team-b .teamb-name').text()
-            let team_b_img = $(item).find('.team-b img').attr('src')
-            let score_dom = $(item).find('.vs-score-wrap .score') ||  $(item).find('.vs-score-wrap .feature')
-            let score_or_VS = score_dom.text().trim() || 'VS'
-            matchList.push({time, match_type, team_a_name, team_a_img, team_b_name, team_b_img, score_or_VS})
+    let wrap = $('.gl_wrap[style!="display: none;"]', html)
+    console.log(wrap.length)
+    let list = []
+    wrap.each((i, v) => {
+        let obj = {}
+        let type = $(v).find('h3 a').text()
+        let typeUrl = $(v).find('h3 a').attr('href')
+        obj.type = type
+        obj.typeUrl = typeUrl
+        let li = $(v).find('ol li')
+        let typeList = []
+        li.each((index, item) => {
+            let obj1 = {}
+            let li_url = $(item).find('a').attr('href')
+            let text = $(item).find('a').text().trim()
+            let li_text = text.slice(0, text.indexOf('('))
+            obj1.li_url = li_url
+            obj1.li_text = li_text
+            typeList.push(obj1)
         })
-        console.log(matchList);
-        
-        List.push({date, matchList})
+        obj.typeList = typeList
+        list.push(obj)
     })
-    // console.log(List);
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list[i].typeList.length; j++) {
+            await getItem(list[i].typeList[j], list[i].typeList[j].li_url, page)
+        }
+    }
     
-    // console.log(JSON.stringify(List))
-    fs.writeFileSync('./mfwtext.js', JSON.stringify(List), { 'flag': 'a' })
-    // books.each(function(){
-    //     const price = $('.price-text',this).text()
-    //     mysql.add(price)
-    //     console.log(price);
-    // })
-    // await page.waitFor(2000);
-    // await page.type('#login_field', '123456')
-    // await page.type('#password', '123456')
-    // await page.click('input[type="submit"]')
+    // console.log(JSON.stringify(list));
+    
+    fs.writeFileSync('./mfwtext.js', JSON.stringify(list), { 'flag': 'a' })
+}
+
+async function getItem (obj, url, page) {
+    await page.goto(baseUrl + url, {
+        waitUntil: 'networkidle2'
+    });
+    let html = await page.content()
+    console.log(url)
+    let wrap = $('.gonglve_wrap', html)
+    let gl_list = []
+    wrap.find('.gl_list').each((i, v) => {
+        let name = $(v).find('a').attr('title')
+        let imgUrl = $(v).find('a img').attr('src')
+        let updata_time = $(v).find('.update_time').text().trim().slice(5)
+        let down_cout = $(v).find('.down_cout p').text().trim().slice(0, -2)
+        gl_list.push({name, imgUrl, updata_time, down_cout})
+    })
+    obj.gl_list = gl_list
 }
 
 run()
