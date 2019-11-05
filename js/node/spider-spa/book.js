@@ -14,27 +14,22 @@ async function run() {
         waitUntil: 'networkidle2'
     });
     let html = await page.content()
-    let content = $('.tab-fav', html)
-    let ul = content.find('._j_tab_content ul')
-    let aList = content.find('.favList a')
+    let content = $('.not-cont', html)
+    let ul = content.find('ul')
+    let li = ul.find('li')
     let list = []
-    aList.each((i, v) => {
-        let text = $(v).text().trim()
-        list.push({tabName: text})
-    })
-    ul.each((i, v) => {
-        let li = $(v).find('li')
-        let arr = []
-        li.each((index, li) => {
-            let imgUrl = $(li).find('img').attr('src') || $(li).find('img').attr('data-src')
-            let name = $(li).find('.info p[class!="eng"]').text().trim()
-            let eng = $(li).find('.info p.eng').text().trim()
-            let score = $(li).find('.fraction').text().trim()
-            arr.push({imgUrl, name, eng, score})
+    console.log(li.length)
+    li.each((i, v) => {
+        let region = $(v).find('h2').text().trim()
+        let travelList = []
+        $(v).find('a').each((index, item) => {
+            let travelName = $(item).text().trim()
+            travelList.push(travelName)
         })
-        list[i].imgList = arr
+        list.push({region, travelList})
     })
-    console.log(JSON.stringify(list))
+    console.log(JSON.stringify(list));
+    
     fs.writeFileSync('./mfwtext.js', JSON.stringify(list), { 'flag': 'a' })
 }
 run()
