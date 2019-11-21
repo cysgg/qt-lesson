@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer')
 const $ = require('cheerio')
-const baseUrl = 'https://www.mafengwo.cn/hotel/'
+const baseUrl = 'https://www.mafengwo.cn/i/16884268.html'
 const fs = require('fs')
 
 
@@ -13,23 +13,26 @@ async function run() {
     await page.goto(baseUrl, {
         waitUntil: 'networkidle2'
     });
+    await page.content()
+    await page.waitFor(2000);
+    await page.evaluate(() => window.scrollTo(0,172111));
+    await page.waitFor(10000)
     let html = await page.content()
-    let content = $('.not-cont', html)
-    let ul = content.find('ul')
-    let li = ul.find('li')
+    let content = $('#note-reply-bottomReplyApi', html)
+    let items = content.find('.mfw-cmt')
     let list = []
-    console.log(li.length)
-    li.each((i, v) => {
-        let region = $(v).find('h2').text().trim()
-        let travelList = []
-        $(v).find('a').each((index, item) => {
-            let travelName = $(item).text().trim()
-            travelList.push(travelName)
-        })
-        list.push({region, travelList})
+    items.each((i ,v) => {
+        let userImg = $(v).find('.mcmt-info .mcmt-photo img').attr('src')
+        let userNameAndAddr = $(v).find('.mcmt-info .mcmt-user a.name').text()
+        let userLevel = $(v).find('.mcmt-info .mcmt-user a.level').text()
+        let quote =  $(v).find('.mcmt-con-wrap .mcmt-con .mcmt-quote p img').attr('src')
+        let content = $(v).find('.mcmt-con-wrap .mcmt-con .mcmt-word p').attr('data-content')
+        let signComment = $(v).find('.mcmt-con-wrap .mcmt-tag img') && $(v).find('.mcmt-con-wrap .mcmt-tag img').attr('src')
+        let time =  $(v).find('.mcmt-bot .time').text()
+        list.push({userImg, userNameAndAddr, userLevel, quote, content, signComment, time})
     })
-    console.log(JSON.stringify(list));
-    
+    console.log(1 + '' + list.length)
+    // browser.close()
     fs.writeFileSync('./mfwtext.js', JSON.stringify(list), { 'flag': 'a' })
 }
 run()
